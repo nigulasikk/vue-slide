@@ -52,7 +52,7 @@ app.vue
             :class='{"disable": !this.slide.init.canNext}'
         >
 
-        <!-- bind inti and pageList -->
+        <!-- bind init and pageList -->
 
         <slide :pages="pages" :slide="slide">
         
