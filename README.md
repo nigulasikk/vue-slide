@@ -2,6 +2,8 @@
 
 # Demo
 
+![](http://ww4.sinaimg.cn/large/675f4a91jw1f1w7pyfbf8g20lm0hakjm.gif)
+
 The demo page is [HERE](http://hilongjw.github.io/vue-slide/demo.html).
 
 # Instllation
