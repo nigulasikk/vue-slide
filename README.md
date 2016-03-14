@@ -54,20 +54,15 @@ app.vue
 
         <!-- bind init and pageList -->
 
-        <slide :pages="pages" :slide="slide">
+        <slide :pages="someList" :slide="slide">
         
             <!-- slot  -->
-            <div class="slider-item page1" :style="pages[0].style">
-                <h1>page1</h1>
-                <button @click="turnTo(2)">to page2</button>
-            </div>
-            <div class="slider-item page2" :style="pages[1].style">
-                <h1>page2</h1>
-                <button @click="turnTo(3)">to page3</button>
-            </div>
-            <div class="slider-item page3" :style="pages[2].style">
-                <h1>page3</h1>
-                <button @click="turnTo(1)">to page1</button>
+            <div 
+                v-for="item in someList"
+                class="slider-item page{{$index}}" 
+                :style="someList[$index].style">
+                <h1>{{item.title}}</h1>
+                <button @click="turnTo(($index+2))">to page{{$index+1}}</button>
             </div>
 
         </slide>
@@ -79,6 +74,44 @@ import slide from 'vue-slide'
 export default {
     data () {
         return {
+            someList:[
+                {
+                    title: '1',
+                    img: 'testimg-1.png',
+                    //slide init
+                    origin: 0,
+                    current: 0,
+                    style:{
+                        'background-image': 'url(dist/testimg-1.png)',
+                        'background-size': 'cover',
+                        //transform
+                        'transform': `translateX(0%)`
+                    }
+                },
+                {
+                    title: '2',
+                    img: 'testimg-2.png',
+                    
+                    origin: 100,
+                    current: 0,
+                    style:{
+                        'background-image': 'url(dist/testimg-2.png)',
+                        'background-size': 'cover',
+                        'transform': `translateX(${ 100 }%)`
+                    }
+                },
+                {
+                    title: '3',
+                    img: 'testimg-3.png',
+                    origin: 200,
+                    current: 0,
+                    style:{
+                        'background-image': 'url(dist/testimg-3.png)',
+                        'background-size': 'cover',
+                        'transform': `translateX(${ 200 }%)`
+                    }
+                }
+            ],
             slide: {
                 init: {
                     pageNum: 3,
@@ -95,25 +128,9 @@ export default {
             
         }
     },
-    computed: {
-        pages () {
-            let pageList = []
-
-            for (let i = 0; i < this.slide.init.pageNum; i++) {
-                pageList.push({
-                        origin: i * 100,
-                        current: 0,
-                        style:{
-                            'transform': `translateX(${ i*100 }%)`
-                        }
-                    })
-            }
-
-            return pageList
-        }
-    },
     methods: {
         turnTo (num) {
+            console.log(num)
             this.$broadcast('slideTo', num)
         },
         slideNext () {

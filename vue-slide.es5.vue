@@ -190,7 +190,10 @@ exports.default = {
             var index = Math.ceil(num) - 1;
             var len = this.pages.length;
             var step = 0;
-
+            if (index > this.pages.length - 1) {
+                console.error("there are no more pages");
+                return false;
+            }
             this.slide.init.currentPage = Math.ceil(num);
 
             for (var i = 0; i < len; i++) {
@@ -240,9 +243,7 @@ exports.default = {
             var opacityValue = 0;
             if (obj.origin + obj.current == 0) opacityValue = 1;
 
-            obj.style = {
-                'transform': 'translateX(' + (obj.origin + obj.current) + '%)'
-            };
+            obj.style['transform'] = 'translateX(' + (obj.origin + obj.current) + '%)';
         }
     }
 };

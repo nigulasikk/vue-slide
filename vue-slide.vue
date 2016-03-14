@@ -123,7 +123,10 @@ export default {
             let index = Math.ceil(num) - 1
             let len = this.pages.length
             let step = 0
-
+            if (index > this.pages.length - 1) {
+                console.error("there are no more pages")
+                return false
+            }
             this.slide.init.currentPage = Math.ceil(num)
 
             for (let i = 0; i<len; i++) {
@@ -152,9 +155,7 @@ export default {
             let opacityValue = 0
             if( (obj.origin + obj.current) == 0) opacityValue = 1
 
-            obj.style = {
-                'transform' : `translateX(${obj.origin + obj.current}%)`
-            }
+            obj.style['transform'] =  `translateX(${obj.origin + obj.current}%)`
         }
     }
 }
