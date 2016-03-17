@@ -75,22 +75,17 @@
             :<span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">'</span>{"disable": !this.slide.init.canNext}<span class="pl-pds">'</span></span>
         &gt;
 
-        <span class="pl-c">&lt;!-- bind inti and pageList --&gt;</span>
+        <span class="pl-c">&lt;!-- bind init and pageList --&gt;</span>
 
-        &lt;<span class="pl-ent">slide</span> :<span class="pl-e">pages</span>=<span class="pl-s"><span class="pl-pds">"</span>pages<span class="pl-pds">"</span></span> :<span class="pl-e">slide</span>=<span class="pl-s"><span class="pl-pds">"</span>slide<span class="pl-pds">"</span></span>&gt;
+        &lt;<span class="pl-ent">slide</span> :<span class="pl-e">pages</span>=<span class="pl-s"><span class="pl-pds">"</span>someList<span class="pl-pds">"</span></span> :<span class="pl-e">slide</span>=<span class="pl-s"><span class="pl-pds">"</span>slide<span class="pl-pds">"</span></span>&gt;
 
             <span class="pl-c">&lt;!-- slot  --&gt;</span>
-            &lt;<span class="pl-ent">div</span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>slider-item page1<span class="pl-pds">"</span></span> :<span class="pl-e">style</span>=<span class="pl-s"><span class="pl-pds">"</span>pages[0].style<span class="pl-pds">"</span></span>&gt;
-                &lt;<span class="pl-ent">h1</span>&gt;page1&lt;/<span class="pl-ent">h1</span>&gt;
-                &lt;<span class="pl-ent">button</span> @<span class="pl-e">click</span>=<span class="pl-s"><span class="pl-pds">"</span>turnTo(2)<span class="pl-pds">"</span></span>&gt;to page2&lt;/<span class="pl-ent">button</span>&gt;
-            &lt;/<span class="pl-ent">div</span>&gt;
-            &lt;<span class="pl-ent">div</span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>slider-item page2<span class="pl-pds">"</span></span> :<span class="pl-e">style</span>=<span class="pl-s"><span class="pl-pds">"</span>pages[1].style<span class="pl-pds">"</span></span>&gt;
-                &lt;<span class="pl-ent">h1</span>&gt;page2&lt;/<span class="pl-ent">h1</span>&gt;
-                &lt;<span class="pl-ent">button</span> @<span class="pl-e">click</span>=<span class="pl-s"><span class="pl-pds">"</span>turnTo(3)<span class="pl-pds">"</span></span>&gt;to page3&lt;/<span class="pl-ent">button</span>&gt;
-            &lt;/<span class="pl-ent">div</span>&gt;
-            &lt;<span class="pl-ent">div</span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>slider-item page3<span class="pl-pds">"</span></span> :<span class="pl-e">style</span>=<span class="pl-s"><span class="pl-pds">"</span>pages[2].style<span class="pl-pds">"</span></span>&gt;
-                &lt;<span class="pl-ent">h1</span>&gt;page3&lt;/<span class="pl-ent">h1</span>&gt;
-                &lt;<span class="pl-ent">button</span> @<span class="pl-e">click</span>=<span class="pl-s"><span class="pl-pds">"</span>turnTo(1)<span class="pl-pds">"</span></span>&gt;to page1&lt;/<span class="pl-ent">button</span>&gt;
+            &lt;<span class="pl-ent">div</span> 
+                <span class="pl-e">v-for</span>=<span class="pl-s"><span class="pl-pds">"</span>item in someList<span class="pl-pds">"</span></span>
+                <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>slider-item page{{$index}}<span class="pl-pds">"</span></span> 
+                :<span class="pl-e">style</span>=<span class="pl-s"><span class="pl-pds">"</span>someList[$index].style<span class="pl-pds">"</span></span>&gt;
+                &lt;<span class="pl-ent">h1</span>&gt;{{item.title}}&lt;/<span class="pl-ent">h1</span>&gt;
+                &lt;<span class="pl-ent">button</span> @<span class="pl-e">click</span>=<span class="pl-s"><span class="pl-pds">"</span>turnTo(($index+2))<span class="pl-pds">"</span></span>&gt;to page{{$index+1}}&lt;/<span class="pl-ent">button</span>&gt;
             &lt;/<span class="pl-ent">div</span>&gt;
 
         &lt;/<span class="pl-ent">slide</span>&gt;
@@ -102,6 +97,44 @@
 <span class="pl-s1"><span class="pl-k">export</span> <span class="pl-v">default</span> {</span>
 <span class="pl-s1">    <span class="pl-en">data</span> () {</span>
 <span class="pl-s1">        <span class="pl-k">return</span> {</span>
+<span class="pl-s1">            someList<span class="pl-k">:</span>[</span>
+<span class="pl-s1">                {</span>
+<span class="pl-s1">                    title<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>1<span class="pl-pds">'</span></span>,</span>
+<span class="pl-s1">                    img<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>testimg-1.png<span class="pl-pds">'</span></span>,</span>
+<span class="pl-s1">                    <span class="pl-c">//slide init</span></span>
+<span class="pl-s1">                    origin<span class="pl-k">:</span> <span class="pl-c1">0</span>,</span>
+<span class="pl-s1">                    current<span class="pl-k">:</span> <span class="pl-c1">0</span>,</span>
+<span class="pl-s1">                    style<span class="pl-k">:</span>{</span>
+<span class="pl-s1">                        <span class="pl-s"><span class="pl-pds">'</span>background-image<span class="pl-pds">'</span></span><span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>url(dist/testimg-1.png)<span class="pl-pds">'</span></span>,</span>
+<span class="pl-s1">                        <span class="pl-s"><span class="pl-pds">'</span>background-size<span class="pl-pds">'</span></span><span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>cover<span class="pl-pds">'</span></span>,</span>
+<span class="pl-s1">                        <span class="pl-c">//transform</span></span>
+<span class="pl-s1">                        <span class="pl-s"><span class="pl-pds">'</span>transform<span class="pl-pds">'</span></span><span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">`</span>translateX(0%)<span class="pl-pds">`</span></span></span>
+<span class="pl-s1">                    }</span>
+<span class="pl-s1">                },</span>
+<span class="pl-s1">                {</span>
+<span class="pl-s1">                    title<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>2<span class="pl-pds">'</span></span>,</span>
+<span class="pl-s1">                    img<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>testimg-2.png<span class="pl-pds">'</span></span>,</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">                    origin<span class="pl-k">:</span> <span class="pl-c1">100</span>,</span>
+<span class="pl-s1">                    current<span class="pl-k">:</span> <span class="pl-c1">0</span>,</span>
+<span class="pl-s1">                    style<span class="pl-k">:</span>{</span>
+<span class="pl-s1">                        <span class="pl-s"><span class="pl-pds">'</span>background-image<span class="pl-pds">'</span></span><span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>url(dist/testimg-2.png)<span class="pl-pds">'</span></span>,</span>
+<span class="pl-s1">                        <span class="pl-s"><span class="pl-pds">'</span>background-size<span class="pl-pds">'</span></span><span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>cover<span class="pl-pds">'</span></span>,</span>
+<span class="pl-s1">                        <span class="pl-s"><span class="pl-pds">'</span>transform<span class="pl-pds">'</span></span><span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">`</span>translateX(<span class="pl-s1"><span class="pl-pse">${</span> <span class="pl-c1">100</span> <span class="pl-pse">}</span></span>%)<span class="pl-pds">`</span></span></span>
+<span class="pl-s1">                    }</span>
+<span class="pl-s1">                },</span>
+<span class="pl-s1">                {</span>
+<span class="pl-s1">                    title<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>3<span class="pl-pds">'</span></span>,</span>
+<span class="pl-s1">                    img<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>testimg-3.png<span class="pl-pds">'</span></span>,</span>
+<span class="pl-s1">                    origin<span class="pl-k">:</span> <span class="pl-c1">200</span>,</span>
+<span class="pl-s1">                    current<span class="pl-k">:</span> <span class="pl-c1">0</span>,</span>
+<span class="pl-s1">                    style<span class="pl-k">:</span>{</span>
+<span class="pl-s1">                        <span class="pl-s"><span class="pl-pds">'</span>background-image<span class="pl-pds">'</span></span><span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>url(dist/testimg-3.png)<span class="pl-pds">'</span></span>,</span>
+<span class="pl-s1">                        <span class="pl-s"><span class="pl-pds">'</span>background-size<span class="pl-pds">'</span></span><span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>cover<span class="pl-pds">'</span></span>,</span>
+<span class="pl-s1">                        <span class="pl-s"><span class="pl-pds">'</span>transform<span class="pl-pds">'</span></span><span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">`</span>translateX(<span class="pl-s1"><span class="pl-pse">${</span> <span class="pl-c1">200</span> <span class="pl-pse">}</span></span>%)<span class="pl-pds">`</span></span></span>
+<span class="pl-s1">                    }</span>
+<span class="pl-s1">                }</span>
+<span class="pl-s1">            ],</span>
 <span class="pl-s1">            slide<span class="pl-k">:</span> {</span>
 <span class="pl-s1">                init<span class="pl-k">:</span> {</span>
 <span class="pl-s1">                    pageNum<span class="pl-k">:</span> <span class="pl-c1">3</span>,</span>
@@ -118,25 +151,9 @@
 <span class="pl-s1"></span>
 <span class="pl-s1">        }</span>
 <span class="pl-s1">    },</span>
-<span class="pl-s1">    computed<span class="pl-k">:</span> {</span>
-<span class="pl-s1">        <span class="pl-en">pages</span> () {</span>
-<span class="pl-s1">            <span class="pl-k">let</span> pageList <span class="pl-k">=</span> []</span>
-<span class="pl-s1"></span>
-<span class="pl-s1">            <span class="pl-k">for</span> (<span class="pl-k">let</span> i <span class="pl-k">=</span> <span class="pl-c1">0</span>; i <span class="pl-k">&lt;</span> <span class="pl-v">this</span>.<span class="pl-smi">slide</span>.<span class="pl-smi">init</span>.<span class="pl-smi">pageNum</span>; i<span class="pl-k">++</span>) {</span>
-<span class="pl-s1">                <span class="pl-smi">pageList</span>.<span class="pl-c1">push</span>({</span>
-<span class="pl-s1">                        origin<span class="pl-k">:</span> i <span class="pl-k">*</span> <span class="pl-c1">100</span>,</span>
-<span class="pl-s1">                        current<span class="pl-k">:</span> <span class="pl-c1">0</span>,</span>
-<span class="pl-s1">                        style<span class="pl-k">:</span>{</span>
-<span class="pl-s1">                            <span class="pl-s"><span class="pl-pds">'</span>transform<span class="pl-pds">'</span></span><span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">`</span>translateX(<span class="pl-s1"><span class="pl-pse">${</span> i<span class="pl-k">*</span><span class="pl-c1">100</span> <span class="pl-pse">}</span></span>%)<span class="pl-pds">`</span></span></span>
-<span class="pl-s1">                        }</span>
-<span class="pl-s1">                    })</span>
-<span class="pl-s1">            }</span>
-<span class="pl-s1"></span>
-<span class="pl-s1">            <span class="pl-k">return</span> pageList</span>
-<span class="pl-s1">        }</span>
-<span class="pl-s1">    },</span>
 <span class="pl-s1">    methods<span class="pl-k">:</span> {</span>
 <span class="pl-s1">        <span class="pl-en">turnTo</span> (<span class="pl-smi">num</span>) {</span>
+<span class="pl-s1">            <span class="pl-en">console</span>.<span class="pl-c1">log</span>(num)</span>
 <span class="pl-s1">            <span class="pl-v">this</span>.<span class="pl-en">$broadcast</span>(<span class="pl-s"><span class="pl-pds">'</span>slideTo<span class="pl-pds">'</span></span>, num)</span>
 <span class="pl-s1">        },</span>
 <span class="pl-s1">        <span class="pl-en">slideNext</span> () {</span>
