@@ -1,5 +1,4 @@
-<script>
-'use strict';
+<script>'use strict';
 
 Object.defineProperty(exports, "__esModule", {
     value: true
@@ -23,6 +22,12 @@ exports.default = {
     },
 
     methods: {
+        swipeUp: function swipeUp(move) {
+            this.$dispatch('swipeUp', move);
+        },
+        swipeDown: function swipeDown(move) {
+            this.$dispatch('swipeDown', move);
+        },
         reset: function reset() {
             var slideTmp = this.pages;
             var _iteratorNormalCompletion = true;
@@ -117,11 +122,13 @@ exports.default = {
                     this.next();
                 } else if (deltaY > this.slide.init.thresholdDistance && Math.abs(deltaX) < this.slide.init.thresholdDistance) {
                     //swipe down
+                    this.swipeDown(Math.abs(deltaY));
                 } else if (-deltaY > this.slide.init.thresholdDistance && Math.abs(deltaX) < this.slide.init.thresholdDistance) {
-                        //swipe up
-                    } else {
-                            //nothing
-                        }
+                    //swipe up
+                    this.swipeUp(Math.abs(deltaY));
+                } else {
+                    //nothing
+                }
             }
         },
         pre: function pre() {
@@ -240,9 +247,6 @@ exports.default = {
             this.styleCompute(obj);
         },
         styleCompute: function styleCompute(obj) {
-            var opacityValue = 0;
-            if (obj.origin + obj.current == 0) opacityValue = 1;
-
             obj.style['transform'] = 'translateX(' + (obj.origin + obj.current) + '%)';
         }
     }

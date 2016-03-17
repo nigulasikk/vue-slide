@@ -15,6 +15,12 @@ export default {
         })
     },
     methods: {
+        swipeUp (move) {
+            this.$dispatch('swipeUp', move)
+        },
+        swipeDown (move) {
+            this.$dispatch('swipeDown', move)
+        },
         reset () {
             let slideTmp = this.pages
             for(let page of slideTmp){
@@ -90,8 +96,12 @@ export default {
                     this.next()
                 } else if ((deltaY > this.slide.init.thresholdDistance)&&(Math.abs(deltaX) < this.slide.init.thresholdDistance)) {
                     //swipe down
+                    this.swipeDown(Math.abs(deltaY))
+
                 } else if ((-deltaY > this.slide.init.thresholdDistance)&&(Math.abs(deltaX) < this.slide.init.thresholdDistance)) {
                     //swipe up
+                    this.swipeUp(Math.abs(deltaY))
+
                 } else {
                     //nothing
                 }
@@ -152,9 +162,6 @@ export default {
             this.styleCompute(obj)
         },
         styleCompute (obj) {
-            let opacityValue = 0
-            if( (obj.origin + obj.current) == 0) opacityValue = 1
-
             obj.style['transform'] =  `translateX(${obj.origin + obj.current}%)`
         }
     }
