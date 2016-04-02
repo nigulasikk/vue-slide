@@ -182,6 +182,9 @@ export default {
     height: 100%;
     text-align: center;
     transition: 0.4s ease-in-out transform, opacity;
+    -webkit-transition: 0.4s ease-in-out transform, opacity;
+    -webkit-transition-duration: 0.4s;
+    -webkit-transition-timing-function: ease-in-out;
 }
 </style>
 <template>
