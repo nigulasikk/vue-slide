@@ -51,7 +51,9 @@ export default {
                     /* Hack - would normally use e.timeStamp but it's whack in Fx/Android */
                     this.slide.init.start.t = new Date().getTime();
                     this.slide.init.start.x = e.targetTouches[0].clientX;
+                    this.slide.init.end.x = e.targetTouches[0].clientX;
                     this.slide.init.start.y = e.targetTouches[0].clientY;
+                    this.slide.init.end.y = e.targetTouches[0].clientY;
                 }
 
             } else {
@@ -192,9 +194,6 @@ export default {
     @touchmove="swipeMove"
     @touchstart="swipeStart"
     @touchend="swipeEnd"
-    @mousedown="swipeStart"
-    @mouseup="swipeEnd"
-    @mousemove="swipeMove"
     >
         <slot></slot>
     </div>
